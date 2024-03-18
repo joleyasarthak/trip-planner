@@ -124,7 +124,7 @@ const EventsScreen = ({ route }) => {
     const fetchEvents = async () => {
       try {
         const response = await fetch(
-          `https://beacon-9ob2.onrender.com/event/${userID}`
+          `${process.env.EXPO_PUBLIC_BACKEND_URI}/event/${userID}`
         );
         const data = await response.json();
         setEvents(data);
@@ -137,7 +137,7 @@ const EventsScreen = ({ route }) => {
   const handleDecision = async (eventId, action) => {
     try {
       const response = await fetch(
-        "https://beacon-9ob2.onrender.com/event/decide",
+        `${process.env.EXPO_PUBLIC_BACKEND_URI}/event/decide`,
         {
           method: "POST",
           headers: {
@@ -145,7 +145,7 @@ const EventsScreen = ({ route }) => {
           },
           body: JSON.stringify({
             action: action,
-            id: userId,
+            id: userID,
             event: eventId,
           }),
         }
@@ -182,7 +182,7 @@ export const EventsProfile = ({ children, userID }) => {
     const fetchEvents = async () => {
       try {
         const response = await fetch(
-          `https://beacon-9ob2.onrender.com/event/${userID}`
+          `${process.env.EXPO_PUBLIC_BACKEND_URI}/event/${userID}`
         );
         const data = await response.json();
         setEvents(data.filter((event) => event.author_id == userID));

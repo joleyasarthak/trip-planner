@@ -9,7 +9,7 @@ const userRouter = require("./routes/user.routes");
 
 require("dotenv").config();
 
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 3000;
 
 const uri = process.env.DB_URI;
 mongoose.connect(uri, {
@@ -24,12 +24,7 @@ connection.once("open", () => {
   console.log("MongoDB database connection established successfully");
 });
 
-app.use(
-  cors({
-    origin: "*", // Allow all origins
-    credentials: true, // Accept credentials (cookies) on the backend
-  })
-);
+app.use(cors());
 app.use(express.json());
 app.use(bp.urlencoded({ extended: true }));
 

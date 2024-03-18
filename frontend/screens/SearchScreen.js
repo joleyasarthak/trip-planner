@@ -1,29 +1,38 @@
 // Import React and necessary components from React Native
-import React, { useState } from 'react';
-import { View, TextInput, Button, Text, Image, FlatList, StyleSheet } from 'react-native';
+import React, { useState } from "react";
+import {
+  View,
+  TextInput,
+  Button,
+  Text,
+  Image,
+  FlatList,
+  StyleSheet,
+} from "react-native";
 
 const handleFriendRequest = async () => {
   try {
-    const response = await fetch('https://beacon-9ob2.onrender.com/user/friend/send', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        user_id: user._id,
-      }),
-    });
+    const response = await fetch(
+      `${process.env.EXPO_PUBLIC_BACKEND_URI}/user/friend/send`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          user_id: user._id,
+        }),
+      }
+    );
     const data = await response.json();
     console.log(data);
   } catch (error) {
-    console.error(error)
+    console.error(error);
   }
-}
+};
 
 // Define the component
 const UserCard = ({ user }) => (
-
-
   <View style={styles.card}>
     <Text style={styles.username}>{user.name}</Text>
     <Button title="Friend" onPress={handleFriendRequest} />
@@ -31,19 +40,20 @@ const UserCard = ({ user }) => (
 );
 
 const SearchScreen = () => {
-
-  const [query, setQuery] = useState('');
+  const [query, setQuery] = useState("");
   const [users, setUsers] = useState([]);
 
   const searchUsers = async () => {
     console.log(query);
     try {
-      const response = await fetch(`https://beacon-9ob2.onrender.com/user/${query}`);
+      const response = await fetch(
+        `${process.env.EXPO_PUBLIC_BACKEND_URI}/user/${query}`
+      );
       const data = await response.json();
       setUsers([...users, data]);
-      console.log(data) // assuming the response data is an array of user objects
+      console.log(data); // assuming the response data is an array of user objects
     } catch (error) {
-      console.error('Error fetching users:', error);
+      console.error("Error fetching users:", error);
     }
   };
 
@@ -67,13 +77,13 @@ const SearchScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#DCC7FF',
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#DCC7FF",
   },
   text: {
     fontSize: 18,
-    color: '#333', // Dark grey text
+    color: "#333", // Dark grey text
   },
   input: {
     height: 40,
@@ -82,12 +92,12 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   card: {
-    flexDirection: 'row',
+    flexDirection: "row",
     padding: 10,
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    alignItems: "center",
+    justifyContent: "space-between",
     borderBottomWidth: 1,
-    borderBottomColor: '#cccccc',
+    borderBottomColor: "#cccccc",
   },
   profilePic: {
     width: 50,
