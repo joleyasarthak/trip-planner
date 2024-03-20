@@ -4,26 +4,27 @@ import { SafeAreaView, View, Text, StyleSheet } from "react-native";
 import { useIsFocused } from "@react-navigation/native";
 import ProfileAvatar from "../modules/avatar";
 import axios from "axios";
+import { useAuth } from "../hooks/AuthContext";
 
 // Define the component
 const getUserFriends = async (user) => {
-  console.log(`${process.env.EXPO_PUBLIC_BACKEND_URI}/user/${user}`);
   const response = await axios.get(
-    `${process.env.EXPO_PUBLIC_BACKEND_URI}/user/${user}`
+    `${process.env.EXPO_PUBLIC_BACKEND_URI}/user/email/${user}`
   );
   return response.data;
 };
 const FriendsScreen = ({ route }) => {
-  const { currentUser } = route.params;
+  const { user } = useAuth();
+  const userID = user.email;
   const [users, setUsers] = useState([]);
   const isFocused = useIsFocused();
 
   useEffect(() => {
     if (isFocused) {
-      getUserFriends(currentUser)
+      getUserFriends(userID)
         .then((data) => {
-          setUsers(() => [...data]);
-          console.log(data);
+          setUsers(data.friends);
+          // console.log(data.friends);
         })
         .catch((err) => console.log(err));
     }
@@ -33,22 +34,20 @@ const FriendsScreen = ({ route }) => {
       <View style={{ alignItems: "center", justifyContent: "center" }}>
         <Text style={{ fontSize: 30, fontWeight: "bold" }}>Friends</Text>
       </View>
-      {users.map((person, index) => {
-        const user = users[users.length - 1 - index];
-        return (
-          <SafeAreaView
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-              gap: 10,
-              marginVertical: 10,
-            }}
-          >
-            <ProfileAvatar size={30} name={user.name}></ProfileAvatar>
-            <Text style={{}}>{user.name}</Text>
-          </SafeAreaView>
-        );
-      })}
+      {users.map((person, index) => (
+        <SafeAreaView
+          key={index} // Add a unique key for each item in the list
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            gap: 10,
+            marginVertical: 10,
+          }}
+        >
+          <ProfileAvatar size={30} name={person} />
+          <Text>{person}</Text>
+        </SafeAreaView>
+      ))}
     </View>
   );
 };

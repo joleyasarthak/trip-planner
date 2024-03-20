@@ -1,51 +1,64 @@
 import {
-    ReactNode,
-    createContext,
-    useContext,
-    useEffect,
-    useState,
-  } from "react";
-  import React from "react";
-  import AsyncStorage from '@react-native-async-storage/async-storage';
-  
-  const UserContext = createContext(null);
-  
-  export const AuthContextProvider = ({ children }) => {
-    const [user, setUser] = useState(null);
+  ReactNode,
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
+import React from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
-    useEffect(() => {
-        const loadUser = async () => {
-        const existingUser = await AsyncStorage.getItem('userToken');
+const UserContext = createContext(null);
 
-        if (existingUser) {
-            setUser(existingUser);
-        }
-        };
+export const AuthContextProvider = ({ children }) => {
+  const [user, setUser] = useState(null);
 
-        loadUser();
-    }, []);
+  useEffect(() => {
+    const loadUser = async () => {
+      const existingUser = await AsyncStorage.getItem("userToken");
 
-    const signIn = async (token) => {
-        await AsyncStorage.setItem('userToken', token);
-        setUser(token);
+      if (existingUser) {
+        setUser(existingUser);
+      }
     };
 
-    const signOut = async () => {
-        await AsyncStorage.removeItem('userToken');
-        setUser(null);
-    };
-    
-    return (
-      <UserContext.Provider value={{ user, signIn, signOut }}>
-        {children}
-      </UserContext.Provider>
-    );
+    loadUser();
+  }, []);
+
+  const signIn = async (token) => {
+    await AsyncStorage.setItem("userToken", JSON.stringify(token));
+    setUser(token);
   };
-  
-  export const useAuth = () => {
-    const context = useContext(UserContext);
-    if (!context) {
-      throw new Error("useAuth must be used within a AuthContextProvider");
+
+  const signOut = async () => {
+    await AsyncStorage.removeItem("userToken");
+    setUser(null);
+  };
+
+  const getUserData = async () => {
+    try {
+      console.log("call");
+      const tokenString = await AsyncStorage.getItem("userToken");
+      // if (tokenString !== null) {
+      const token = await JSON.parse(tokenString);
+      return token;
+      // }
+    } catch (error) {
+      console.error(error);
     }
-    return context;
   };
+
+  return (
+    <UserContext.Provider value={{ user, signIn, signOut, getUserData }}>
+      {children}
+    </UserContext.Provider>
+  );
+};
+
+export const useAuth = () => {
+  const context = useContext(UserContext);
+  if (!context) {
+    throw new Error("useAuth must be used within a AuthContextProvider");
+  }
+  return context;
+};

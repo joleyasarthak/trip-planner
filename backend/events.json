@@ -1,0 +1,90 @@
+[
+    {
+        "_id": "65d1fdf8196dfaf01dc833b6",
+        "invited": [
+            "Rita",
+            "Rita"
+        ],
+        "accepted": [],
+        "declined": [],
+        "date_expected": "Feb 19@ 9AM",
+        "author_id": "Rita",
+        "location": {
+            "latitude": 43.54989623459762,
+            "longitude": -79.66317829465903
+        },
+        "title": "Midterm Study Session",
+        "description": "Come study with me!",
+        "status": "EVENT",
+        "createdAt": "2024-02-18T12:54:16.880Z",
+        "updatedAt": "2024-02-18T12:54:16.880Z",
+        "__v": 0
+    },
+    {
+        "_id": "65d1fe78196dfaf01dc833cc",
+        "invited": [
+            "Rita",
+            "Rita"
+        ],
+        "accepted": [],
+        "declined": [],
+        "date_expected": "Feb 19@ 9AM",
+        "author_id": "Rita",
+        "location": {
+            "latitude": 43.470458506586226,
+            "longitude": -80.53610781921967
+        },
+        "title": "Gym at CMH",
+        "description": "Come gym with me!",
+        "status": "EVENT",
+        "createdAt": "2024-02-18T12:56:24.423Z",
+        "updatedAt": "2024-02-18T12:56:24.423Z",
+        "__v": 0
+    },
+    {
+        "_id": "65d1ff5a196dfaf01dc833ea",
+        "invited": [
+            "Rita",
+            "Rita"
+        ],
+        "accepted": [],
+        "declined": [],
+        "date_expected": "Feb 20th @ 9AM",
+        "author_id": "Rita",
+        "location": {
+            "latitude": 43.469858611839584,
+            "longitude": -80.54228359692729
+        },
+        "title": "Study Session",
+        "description": "Come study ECE 124 with me!",
+        "status": "EVENT",
+        "createdAt": "2024-02-18T13:00:10.054Z",
+        "updatedAt": "2024-02-18T13:00:10.054Z",
+        "__v": 0
+    },
+    {
+        "_id": "65d22188a0c31ed5b26c373a",
+        "invited": [
+            "Owen Zhang",
+            "William",
+            "Owen Zhang",
+            "Rita",
+            "Sally Jeong",
+            "Owen Zhang"
+        ],
+        "accepted": [],
+        "declined": [],
+        "date_expected": "10:24 AM",
+        "author_id": "Owen Zhang",
+        "location": {
+            "latitude": 43.54693284165474,
+            "longitude": -79.66190641085386
+        },
+        "title": "minions presentation",
+        "description": "hi",
+        "status": "EVENT",
+        "createdAt": "2024-02-18T15:26:00.529Z",
+        "updatedAt": "2024-02-18T15:26:00.529Z",
+        "__v": 0
+    }
+]

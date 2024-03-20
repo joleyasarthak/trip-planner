@@ -11,9 +11,75 @@ import {
 } from "react-native";
 import axios from "axios";
 import { useAuth } from "../hooks/AuthContext";
+import useAuthStore from "../stores/useAuth";
 
-const LoginScreen = ({ navigation, route }) => {
+const                                    ,,,,,,,,,,,, , ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,llllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll ,,,,,,,,       llllllllllllllllllllllll   l  l                      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ,ṁLoginScreen = ({ navigation, route }) => {
   const [email, setEmail] = useState("");
+
   const [password, setPassword] = useState("");
   const { user, signIn } = useAuth();
 
@@ -30,7 +96,7 @@ const LoginScreen = ({ navigation, route }) => {
     try {
       emailToName(email)
         .then((data) => {
-          signIn(data);
+          signIn({ data, email });
           console.log(user);
         })
         .then(() => navigation.navigate("TabNavigator", { screen: "Events" }));
@@ -53,7 +119,7 @@ const LoginScreen = ({ navigation, route }) => {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.container}>
-        <Image source={require("../assets/logo.png")} style={styles.logo} />
+        <Image source={require("../assets/logo1.png")} style={styles.logo} />
         <TextInput
           style={styles.input}
           onChangeText={setEmail}
@@ -125,9 +191,10 @@ const styles = StyleSheet.create({
   },
   logo: {
     top: 25, // Adjust top position as needed
-    width: 320, // Set the width of your logo
-    height: 320, // Set the height of your logo
-    resizeMode: "contain", // Keep the logo's aspect rati;
+    width: 250, // Set the width of your logo
+    height: 250, // Set the height of your logo
+    resizeMode: "contain",
+    marginBottom: 30, // Keep the logo's aspect rati;
   },
 });
 

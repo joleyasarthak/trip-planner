@@ -11,11 +11,12 @@ import { Swipeable } from "react-native-gesture-handler";
 import { Dimensions } from "react-native";
 import ProfileAvatar from "../modules/avatar";
 import { useIsFocused } from "@react-navigation/native";
+import { useAuth } from "../hooks/AuthContext";
 
 const screenWidth = Dimensions.get("window").width;
 const swipeThreshold = screenWidth / 3;
 
-const eventsData = [
+const events = [
   {
     author_id: "Lily",
     title: "Lily's Birthday Bash!",
@@ -115,11 +116,12 @@ const EventItem = ({ event, handleDecision }) => {
 };
 
 const EventsScreen = ({ route }) => {
-  const { currentUser } = route.params;
-  const userID = currentUser;
+  const { user } = useAuth();
+  const userID = user.email;
   const [events, setEvents] = useState([]);
   const isFocused = useIsFocused();
 
+  console.log(`${process.env.EXPO_PUBLIC_BACKEND_URI}/event/${userID}`);
   useEffect(() => {
     const fetchEvents = async () => {
       try {
@@ -164,7 +166,7 @@ const EventsScreen = ({ route }) => {
         contentContainerStyle={{ paddingBottom: 120 }} // Added padding at the bottom for better scrolling
       >
         <View style={styles.headerContainer}>
-          <Text style={styles.headerTitle}>Beacons</Text>
+          <Text style={styles.headerTitle}>Voyager</Text>
         </View>
         {events.map((event, index) => (
           <EventItem key={index} event={events[events.length - 1 - index]} />
@@ -220,7 +222,7 @@ export const EventsProfile = ({ children, userID }) => {
               height: 200,
             }}
           >
-            <Text>No beacons available</Text>
+            <Text>No voyages available</Text>
           </View>
         )}
       </ScrollView>

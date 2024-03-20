@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, TextInput, Button, Modal } from "react-native";
 import MapView, { Marker, Callout } from "react-native-maps";
+import { useAuth } from "../hooks/AuthContext";
 
 const MapScreen = ({ route }) => {
   const { currentUser, setUpdate } = route.params;
-  const userID = currentUser;
-
+  // const userID = currentUser;
+  const { user } = useAuth();
+  const { name, email } = user;
   const [markers, setMarkers] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
-  const [tempMarker, setTempMarker] = useState({});
+  const [tempMarker, setTempMarker] = useState({ latitude: 0, longitude: 0 });
   const [markerTitle, setMarkerTitle] = useState("");
   const [markerDescription, setMarkerDescription] = useState("");
   const [markerDate, setMarkerDate] = useState("");
@@ -26,14 +28,14 @@ const MapScreen = ({ route }) => {
   const addEvent = async () => {
     const eventData = {
       date_expected: markerDate,
-      author_id: userID,
+      author_id: email,
       location: {
         latitude: tempMarker.latitude,
         longitude: tempMarker.longitude,
       },
       title: markerTitle,
       description: markerDescription,
-      invited: [userID],
+      invited: [email],
       status: "EVENT",
     };
 
@@ -72,9 +74,10 @@ const MapScreen = ({ route }) => {
 
   useEffect(() => {
     const fetchEvents = async () => {
+      console.log(`${process.env.EXPO_PUBLIC_BACKEND_URI}/event/${email}`);
       try {
         const response = await fetch(
-          `${process.env.EXPO_PUBLIC_BACKEND_URI}/event/${userID}`,
+          `${process.env.EXPO_PUBLIC_BACKEND_URI}/event/${email}`,
           {
             method: "GET",
           }

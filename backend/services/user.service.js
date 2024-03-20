@@ -17,8 +17,8 @@ const createUser = async (body) => {
     password: password,
     _id: email,
   });
-  console.log(newUser);
-  return await newUser.save();
+  const user = await newUser.save();
+  return user;
 };
 
 const getAllUser = async () => {

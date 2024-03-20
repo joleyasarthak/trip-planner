@@ -77,7 +77,7 @@ const SearchScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
+    justifyContent: "flex-start",
     alignItems: "center",
     backgroundColor: "#DCC7FF",
   },
@@ -86,12 +86,18 @@ const styles = StyleSheet.create({
     color: "#333", // Dark grey text
   },
   input: {
-    height: 40,
-    margin: 12,
-    borderWidth: 1,
-    padding: 10,
+    marginTop: 100,
+    height: 50,
+    width: "80%",
+    backgroundColor: "#FFFFFF", // Input field background color
+    marginBottom: 30,
+    paddingHorizontal: 20,
+    borderRadius: 25, // Rounded corners for input fields
+    fontSize: 16,
+    color: "#000000",
   },
   card: {
+    marginTop: 20,
     flexDirection: "row",
     padding: 10,
     alignItems: "center",
@@ -106,6 +112,7 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   username: {
+    paddingRight: 60,
     fontSize: 18,
   },
 });
